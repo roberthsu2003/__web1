@@ -9,7 +9,22 @@
 {%  endblock %}
 
 {% block content %}
-<h1>登入</h1>
+<h1>使用者登入</h1>
+<form method="post">
+    {{form.csrf_token}}
+    <div class="mb-3">
+        <label for="username" class="form-label"> {{form.name.label}}</label>
+        {{form.name(class="form-control",for="username")}}
+    </div>
+    <div class="mb-3">        
+        <label for="userpassword" class="form-label"> {{form.password.label}}</label>
+        {{form.password(class="form-control",for="userpassword")}}
+    </div>
+    {% if error %}
+    <h3>密碼有誤</h3>
+    {% endif %}
+    <input type="submit" class="btn btn-primary" value="送出">
+</form>
 {% endblock %}
 
 {% block script%}
