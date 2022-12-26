@@ -5,6 +5,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField
 from wtforms.validators import DataRequired
 
+from api.index  import api
+
 
 
 class User_Login(FlaskForm):
@@ -14,6 +16,7 @@ class User_Login(FlaskForm):
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex()
+app.register_blueprint(api,url_prefix="/api")
 
 @app.route("/")
 def index():
@@ -46,3 +49,6 @@ def login():
 def logout():
     session.pop('login_name',None)
     return redirect(url_for('index'))
+
+
+
